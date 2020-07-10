@@ -49,7 +49,7 @@ Sub AddLocations()
     Dim locationArray(0 To 1070) As Variant
     Dim listboxname As String
     Dim cnt As Long
-    
+Dim i, j, k, p as Integer
     For i = 1 To 6
         If i = 1 Then Set lb = Me.WDTableLocation
         If i = 2 Then Set lb = Me.WDMeasureLocation
