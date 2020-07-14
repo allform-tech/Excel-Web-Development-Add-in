@@ -14,23 +14,99 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub btnAdd_Click()
-Me.Hide
-Main.Show
+    Dim ArrayLocation As Integer
+    Dim i As Integer
+    Dim txt As String
+
+    ArrayLocation = ChartFunctions.nextFreeCellCharts()
+
+    txt = ""
+    txt = txt & Me.WDChartLocation & SD
+    txt = txt & Me.WDChartType & SD
+    txt = txt & Me.WDChartTitle & SD
+    txt = txt & Me.WDChartTable & SD
+    txt = txt & Me.WDChartXaxisLable & SD
+    txt = txt & Me.WDChartYaxixLabel & SD
+    txt = txt & Me.WDChartColors & SD
+    txt = txt & Me.WDChartStyles & SD
+    txt = txt & Me.WDChartClass & SD
+    txt = txt & Me.WDChartWidth & SD
+    txt = txt & Me.WDChartLocation & SD
+    
+    init.WDCharts(ArrayLocation) = txt
+    
+    Me.Hide
+    Main.Show
+    init.LoadedChart = 0
+    init.LoadedChart = ArrayLocation
+    Main.WDElements.Clear
+    Call init.loadChartsListBox
+    ElementListBoxItemCount = 0
 End Sub
 
 
+
+Private Sub UserForm_Activate()
+    If init.SelectedElement > -1 Then
+    tempArray = Split(WDCharts(init.SelectedElement), SD)
+    
+        For i = 0 To UBound(tempArray)
+            Me.WDChartLocation = tempArray(0)
+            Me.WDChartType = tempArray(1)
+            Me.WDChartTitle = tempArray(2)
+            Me.WDChartTable = tempArray(3)
+            Me.WDChartXaxisLable = tempArray(4)
+            Me.WDChartYaxixLabel = tempArray(5)
+            Me.WDChartColors = tempArray(6)
+            Me.WDChartStyles = tempArray(7)
+            Me.WDChartClass = tempArray(8)
+            Me.WDChartWidth = tempArray(9)
+            Me.WDChartLocation = tempArray(10)
+        Next i
+        
+    End If
+
+
+
+End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-Me.Hide
-Main.Show
+    Me.Hide
+    Main.Show
+    LoadedChart = 0
+    LoadedChart = -1
 End Sub
 
-Private Sub WDChartLocation_Change()
 
-End Sub
 Private Sub UserForm_Initialize()
-Call AddLocations
+    Call AddLocations
+    
+    Dim tempArray As Variant
+    Dim i As Integer
+    
+    If init.SelectedElement > -1 Then
+    tempArray = Split(WDCharts(init.SelectedElement), SD)
+    
+        For i = 0 To UBound(tempArray)
+            Me.WDChartLocation = tempArray(0)
+            Me.WDChartType = tempArray(1)
+            Me.WDChartTitle = tempArray(2)
+            Me.WDChartTable = tempArray(3)
+            Me.WDChartXaxisLable = tempArray(4)
+            Me.WDChartYaxixLabel = tempArray(5)
+            Me.WDChartColors = tempArray(6)
+            Me.WDChartStyles = tempArray(7)
+            Me.WDChartClass = tempArray(8)
+            Me.WDChartWidth = tempArray(9)
+            Me.WDChartLocation = tempArray(10)
+        Next i
+        
+    End If
+    
 End Sub
+
+
+
 Sub AddLocations()
     Dim lb As Object
     Dim locationArray(1 To 200) As Variant
@@ -53,3 +129,5 @@ Sub AddLocations()
         Next j
     Next i
 End Sub
+
+

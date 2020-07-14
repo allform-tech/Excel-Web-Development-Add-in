@@ -102,3 +102,16 @@ Function chartTableToJSON(TableName As String, address As String, title As Strin
     chartTableToJSON = "['" & address & "'," & "'" & title & "'," & "'" & chartType & "'," & "'" & chartWidth & "'," & "'" & chartHeight & "'," & dataPoints & "," & Lables & "," & Color & "," & Lables & ",'" & XaxiTitle & "','" & YaxixTitle & "'],"
     'Debug.Print (chartTableToJSON)
 End Function
+
+
+Function nextFreeCellCharts() As Integer
+    Dim i, j As Integer
+    
+    For i = 1 To UBound(WDCharts)
+    free = False
+        If WDCharts(i) = "" Then Exit For
+    Next i
+    nextFreeCellCharts = i
+    
+End Function
+
